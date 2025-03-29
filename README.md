@@ -1,5 +1,7 @@
 # Welcome to AI Code Hub
 I've created an AI-driven solution hub with a modern interface featuring a responsive design, interactive code examples, and sections highlighting AI benefits for development.
+This project evokes modern developer tools like GitHub Copilot or AI coding assistants, with a clean and intuitive interface using a professional color scheme with blue gradients and subtle animations to create a polished experience.
+
 **Use your preferred IDE**
 
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
@@ -45,4 +47,5 @@ This project is built with .
 - React
 - shadcn-ui
 - Tailwind CSS
+- text.cortex api
 

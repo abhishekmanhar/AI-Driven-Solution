@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ddc948103a3f2f8b0d3a48ed21963c33a22ad86
+
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 
 // The API key for text.cortex
-const TEXT_CORTEX_API_KEY = "gAAAAABn51Xnq1-tiyF-Q6FzybU2MsPNW09qMEOAvuh73Jk9jfQFz3NhBiBVg0gz7xrjp5NSel2JhtsrIoOHU3DUlp-bwu5gdT_nORnjW-T6mlAiv4Ijz1fTDwZDvVvErUwwPP5_24tuSF5CGbdqQCsjmcYZOTB3XYedR3rg-wqQz8YOZBGIFXs=";
+const TEXT_CORTEX_API_KEY = "gAAAAABn52b901Abhfsl2O7teHTThWncKAr3Y3rXvrnMLp80ZSaJs795FFWZovT1rmNQIa-0QC27CHlOk8BPI2ZfpKI6i7m3xc2VV9iZPV4mw2bciESfE42qQ26rSZ74nS5K8x3jwiAHop2Gpatavbt6_5LGmMeMLVOFSTPcJg0X5ah3kAvzr1A=";
 
 export const useLLMCodeEnhancer = () => {
   const [isLoading, setIsLoading] = useState(false);

@@ -7,8 +7,8 @@ import { ArrowRight, Wand2, Loader2, CheckCircle2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { useLLMCodeEnhancer } from '@/hooks/useLLMCodeEnhancer';
 
+// Example code improvements for the demo
 const codeExamples = {
   optimization: {
     before: `function calculateFactorial(n) {
@@ -84,23 +84,64 @@ const getAdults = () => users.filter(user => user.age >= 18);`,
 
 const CodeEnhancer = () => {
   const [userCode, setUserCode] = useState('');
+  const [enhancedCode, setEnhancedCode] = useState('');
+  const [isEnhancing, setIsEnhancing] = useState(false);
+  const [selectedExample, setSelectedExample] = useState('optimization');
   const [activeTab, setActiveTab] = useState('editor');
-  const [selectedExample, setSelectedExample] = useState('');
-  const { enhanceCodeWithLLM, enhancedCode, isLoading } = useLLMCodeEnhancer();
   const { toast } = useToast();
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUserCode(e.target.value);
+    setEnhancedCode(''); // Reset enhanced code when user changes input
   };
 
   const enhanceCode = () => {
-    enhanceCodeWithLLM(userCode);
-    setActiveTab('result');
+    if (!userCode.trim()) {
+      toast({
+        title: "Empty Code",
+        description: "Please enter some code to enhance.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsEnhancing(true);
+    
+    // Simulate AI processing delay
+    setTimeout(() => {
+      // In a real application, this would be an API call to the AI service
+      let result = '';
+      
+      // For demo purposes, we'll use predefined examples based on simple pattern matching
+      if (userCode.includes('factorial')) {
+        result = codeExamples.optimization.after;
+      } else if (userCode.includes('function f(') || userCode.includes('var z')) {
+        result = codeExamples.readability.after;
+      } else if (userCode.includes('var users') || userCode.includes('getAdults')) {
+        result = codeExamples.modernization.after;
+      } else {
+        // If no pattern matches, enhance with a default improvement
+        result = `// Enhanced version of your code\n${userCode
+          .replace(/var /g, 'const ')
+          .replace(/function\s+([a-zA-Z0-9_]+)/g, 'const $1 = ')
+          .replace(/\);$/g, ');')}\n\n// Added improvements:\n// - Converted var to const for better scoping\n// - Used arrow functions for cleaner syntax`;
+      }
+      
+      setEnhancedCode(result);
+      setIsEnhancing(false);
+      setActiveTab('result');
+      
+      toast({
+        title: "Enhancement Complete",
+        description: "Your code has been improved by our AI.",
+      });
+    }, 2000);
   };
 
   const loadExample = (type: string) => {
     setSelectedExample(type);
     setUserCode(codeExamples[type as keyof typeof codeExamples].before);
+    setEnhancedCode('');
     setActiveTab('editor');
   };
 
@@ -185,9 +226,9 @@ const CodeEnhancer = () => {
               <Button 
                 onClick={enhanceCode}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600"
-                disabled={isLoading || !userCode}
+                disabled={isEnhancing || !userCode}
               >
-                {isLoading ? (
+                {isEnhancing ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Enhancing...

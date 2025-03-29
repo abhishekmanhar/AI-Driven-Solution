@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 2ddc948103a3f2f8b0d3a48ed21963c33a22ad86
 
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
